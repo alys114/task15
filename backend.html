@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>后台管理页面</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background-color: #2E5E79;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    header {
+      /* background-color: #8FC7C7; */
+      background-color: #204562;
+      color: #FFFFFF;
+      line-height: 48px;
+      position: relative;
+      /* 与z-index冲突，overflow:hiddent表示父亲包含所有子类，这样导致子类的导航条无法超过header*/
+      /* overflow: hidden; */
+      height: 48px;
+    }
+
+    .ph_logo {
+      margin: 0px 10px;
+      width: 240px;
+    }
+
+    .ph_logo,
+    .ph_menu {
+      float: left;
+    }
+
+    .ph_logo img {
+      height: 38px;
+      width: 48px;
+      margin-top: 4px;
+      margin-right: 6px;
+      border-radius: 30%;
+      float: left;
+    }
+
+    .menu_item {
+      overflow: hidden;
+      line-height: 48px;
+    }
+
+    .menu_item li {
+      list-style-type: none;
+      float: left;
+      margin: 0 4px;
+      text-align: center;
+      width: 72px;
+    }
+
+    .menu_item li a {
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+
+    .menu_item li a:hover {
+      padding: 4px;
+      background-color: #315C7C;
+      border-radius: 2px;
+      color: #FFFFFF;
+    }
+
+    .ph_login {
+      float: right;
+      margin-right: 30px;
+      /* height: 48px; */
+      /* line-height: 48px; */
+      padding: 0 4px;
+      display: block;
+    }
+
+    .ph_login img {
+      height: 38px;
+      width: 48px;
+      margin-top: 4px;
+      border-radius: 30%;
+    }
+
+    .ph_login ul {
+      overflow: hidden;
+    }
+
+    .ph_login li {
+      height: 36px;
+      line-height: 36px;
+      list-style-type: none;
+      padding: 0 6px;
+    }
+
+    .ph_login li a {
+      text-decoration: none;
+      color: #000000;
+
+    }
+
+    .ph_login li:hover {
+      background-color: #315C7C;
+      /* color:#FFFFFF; */
+    }
+
+    .ph_login li a:hover {
+      color: #FFFFFF;
+    }
+
+    .ph_login:hover .hid_menu {
+      display: block;
+    }
+
+    .ph_login .hid_menu a {
+      display: block;
+    }
+
+    .leftmenu {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      bottom: 60px;
+      background-color: #D1DEE4;
+      width: 180px;
+    }
+
+    .content {
+      position: absolute;
+      top: 48px;
+      right: 0;
+      bottom: 60px;
+      left: 180px;
+      overflow: auto;
+      z-index: 1;
+      background-color: #D1DEE4;
+      margin: 0 8px;
+    }
+
+    .hid_menu {
+      position: absolute;
+      top: 48px;
+      right: 30px;
+      width: 160px;
+      background-color: #FFFFFF;
+      z-index: 10;
+      color: #000000;
+      display: none;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      height: 60px;
+      background-color: #204562;
+      color: #FFFFFF;
+      width: 100%;
+      text-align: center;
+      line-height: 60px;
+      /* opacity: 0.5; */
+    }
+
+    .leftmenu nav .header {
+      width: 160px;
+      height: 30px;
+      background-color: #315C7C;
+      color: white;
+      line-height: 30px;
+      padding: 0px 8px;
+      border: 1px solid white;
+      border-radius: 4px;
+    }
+
+    .leftmenu nav li {
+      padding: 0 10px;
+    }
+
+    .leftmenu nav li a {
+      text-decoration: none;
+      display: block;
+      padding: 0 2px;
+    }
+
+    .leftmenu nav li a:hover {
+      background-color: #8BC5C5;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .sum_info {
+      /* height: 220px; */
+      font-size: 1.2em;
+      top: 10px;
+    }
+
+    .sum_info div {
+      float: left;
+      width: 19%;
+      margin: 4px;
+      height: 200px;
+      /* line-height: 100px; */
+      border: 1px solid green;
+    }
+
+    .sum_info .label {
+      background-color: #2E5E79;
+      color: #FFFFFF;
+      text-align: center;
+      line-height: 100px;
+      font-size: 1.4em;
+      font-weight: bold;
+      /* opacity: 0.9; */
+    }
+
+    .sum_info .val {
+      /* color: */
+      text-align: center;
+      line-height: 100px;
+      font-size: 1.4em;
+      font-weight: bold;
+      text-shadow: 4px 4px 5px #aaa;
+    }
+
+    .tab_info {
+      margin: 2px;
+      padding: 2px;
+      position: relative;
+      top: 10px;
+
+    }
+
+    .tab_info input[type="button"] {
+      width: 60px;
+      height: 40px;
+      font-size: 1em;
+    }
+
+    .tab_info table {
+      border: 0;
+      width: 100%;
+      margin-top: 10px;
+      text-align: center;
+      background-color: #FFFFFF;
+      font-size: 1.1em;
+      border-radius: 6px;
+    }
+
+    .tab_info table th {
+      color: #000000;
+      font-size: 1.2em;
+      height: 36px;
+      border-bottom: 1px solid #2E5E79;
+    }
+
+    .tab_info table td {
+      border-bottom: 1px solid #2E5E79;
+      height: 36px;
+    }
+
+    .toplink {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background-color: #D1DEE4;
+      color: #000000;
+      height: 48px;
+      width: 48px;
+      display: block;
+      z-index: 5;
+    }
+
+    .toplink img {
+      width: 48px;
+      height: 48px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="ph_logo"><img src="images/CC_64px.png">
+      <h2>后台管理系统</h2></div>
+    <div class="ph_menu">
+      <ul class="menu_item">
+        <li><a href="#">消息管理</a></li>
+        <li><a href="#">会员管理</a></li>
+        <li><a href="#">订单管理</a></li>
+        <li><a href="#">产品管理</a></li>
+        <li><a href="#">个人中心</a></li>
+        <li><a href="#">系统设置</a></li>
+      </ul>
+    </div>
+    <div class="ph_login">
+      <a href="#"><img src="images/bite.jpg"></a>
+      <div class="hid_menu">
+        <ul>
+          <li><a href="#">注销</a></li>
+          <li><a href="#">修改密码</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div>
+    <div class="leftmenu">
+      <nav>
+        <div class="item">
+          <div class="header" id="menu1" onclick="displayMenu(this);">订单管理</div>
+          <ul>
+            <li><a href="#">未支付</a></li>
+            <li><a href="#">退费处理</a></li>
+            <li><a href="#">已支付查询</a></li>
+          </ul>
+        </div>
+        <div class="item">
+          <div class="header" id="menu2" onclick="displayMenu(this);">产品管理</div>
+          <ul class="hide">
+            <li><a href="#">新增产品</a></li>
+            <li><a href="#">修改产品</a></li>
+            <li><a href="#">注销产品</a></li>
+          </ul>
+        </div>
+        <div class="item">
+          <div class="header" id="menu3" onclick="displayMenu(this);">会员管理</div>
+          <ul class="hide">
+            <li><a href="#">新增会员</a></li>
+            <li><a href="#">修改密码</a></li>
+            <li><a href="#">注销会员</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="content" id="content">
+      <div class="sum_info">
+        <div>
+          <p class="label">今日收入</p>
+          <p class="val">$260.000</p>
+        </div>
+        <div>
+          <p class="label">今日退款</p>
+          <p class="val">-$4.000</p>
+        </div>
+        <div>
+          <p class="label">商品数量</p>
+          <p class="val">30.000件</p>
+        </div>
+        <div>
+          <p class="label">今日总收入</p>
+          <p class="val">+$256.000</p>
+        </div>
+        <div>
+          <p class="label">比昨天增长</p>
+          <p class="val">+10%</p>
+        </div>
+      </div>
+
+      <div class="clear tab_info">
+        <hr />
+        <input type="button" value="全选" onclick="chooseAll();">
+        <input type="button" value="取消" onclick="cancelAll();">
+        <input type="button" value="反选" onclick="reverseAll();">
+        <table border="0">
+          <thead>
+            <th>选择</th>
+            <th>支付订单号</th>
+            <th>购买用户</th>
+            <th>支付时间</th>
+            <th>金额</th>
+            <th>状态</th>
+            <th>操作</th>
+          </thead>
+          <tbody id="tb">
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>E201801010001</td>
+              <td>Vincent</td>
+              <td>2018-01-01 12:00</td>
+              <td style="text-align:right;">$3.600</td>
+              <td>支付成功</td>
+              <td><a href="#">退费</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="toplink" onclick="goTop();">
+      <img src="images/up_arrow.png" alt="返回顶部">
+  </div>
+  <footer>【19组-陈志伟】 Copyright © 2018 oldboy Python自动化运维</footer>
+  <script>
+    function displayMenu(mid) {
+      // console.log(mid);
+      var menu = mid.parentElement.parentElement; /* nav */
+      var menu_list = menu.children; /* item */
+      for (var i = 0; i < menu_list.length; i++) {
+        content = menu_list[i];
+        content.children[1].classList.add('hide'); /* content */
+      }
+      mid.nextElementSibling.classList.remove('hide'); /* content */
+    }
+
+    function chooseAll() {
+      var tb = document.getElementById('tb');
+      var tr_list = tb.children;
+      for (var i = 0; i < tr_list.length; i++) {
+        var cur_tr = tr_list[i];
+        var ck = cur_tr.children[0].children[0];
+        ck.checked = true;
+      }
+
+    }
+
+    function cancelAll() {
+      var tb = document.getElementById('tb');
+      var tr_list = tb.children;
+      for (var i = 0; i < tr_list.length; i++) {
+        var cur_tr = tr_list[i];
+        var ck = cur_tr.children[0].children[0];
+        ck.checked = false;
+      }
+
+    }
+
+    function reverseAll() {
+      var tb = document.getElementById('tb');
+      var tr_list = tb.children;
+      for (var i = 0; i < tr_list.length; i++) {
+        var cur_tr = tr_list[i];
+        var ck = cur_tr.children[0].children[0];
+        if (ck.checked) {
+          ck.checked = false;
+        } else {
+          ck.checked = true;
+        }
+
+      }
+    }
+    function goTop() {
+      console.log(1);
+      document.documentElement.scrollTop = 0
+       // document.body.scrollTop = 0; /* 必须两个都要写 */
+    }
+  </script>
+</body>
+
+</html>

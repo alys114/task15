@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>注册页面</title>
+  <style>
+    * {
+      margin: 0;
+    }
+
+    body {
+      font-size: 1.1em;
+    }
+
+    .pg-content {
+      width: 380px;
+      position: relative;
+      margin: 0 auto;
+      top: 20px;
+    }
+
+    #login {
+      border: 1px solid gray;
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    #login h2 {
+      display: block;
+      background-color: #8FC7C7;
+      border: 1px solid gray;
+      width: 320px;
+      margin-left: 10px;
+      border-radius: 4px;
+    }
+
+    #login span {
+      color: red;
+      margin: 0 5px;
+      font-weight: bold;
+    }
+
+    .row div {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .row {
+      margin: 10px 0 0 0;
+      /* height: 40px; */
+    }
+
+    .row .inputText {
+      height: 20px;
+      width: 175px;
+      font-size: 1.1em;
+      margin-left: 15px;
+    }
+
+    .row #checkCode {
+      height: 20px;
+      font-size: 1.1em;
+      width: 80px;
+      margin-left: 15px;
+    }
+
+    .row div:nth-child(1) {
+      width: 120px;
+      text-align: right;
+      padding-right: 5px;
+      /* padding-top: 5px; */
+    }
+
+    .row div:nth-child(2) {
+      padding-left: 10px;
+      position: relative;
+      /* padding-top: 5px; */
+    }
+    #login .row .input_img {
+      margin: 0;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      border: 1px solid gray;
+      border-right: 0;
+      background-repeat: no-repeat;
+      position: absolute;
+      float: left;
+      left: 0px;
+    }
+
+    #img_user {
+      background-image: url("images/User_24px.png");
+    }
+
+    #img_password,#img_cf_password {
+      background-image: url("images/Lock_24px.png");
+    }
+
+    #img_checkcode {
+      background-image: url("images/Key_24px.png");
+    }
+
+    #img_mobile{
+      background-image: url("images/Mobile_24px.png");
+    }
+
+
+    .d-submit {
+      display: block;
+      background-color: #0181A6;
+      width: 320px;
+      height: 36px;
+      line-height: 36px;
+      margin: 10px 0 0 10px;
+      text-align: center;
+      color: #ffffff;
+      box-shadow: 1px 1px 3px rgba(44, 40, 37, 0.8);
+      margin-bottom: 10px;
+      border: 1px solid gray;
+      font-size: 1em;
+      border-radius: 4px;
+    }
+
+    .d-reg {
+      text-align: left;
+      margin-left: 40px;
+    }
+
+    .d-submit:hover {
+      background-color: #006B73;
+    }
+
+    .row2 {
+      padding: 0;
+      margin: 0;
+    }
+
+    .row2 div {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .row2 div:nth-child(1) {
+      width: 120px;
+      padding-right: 5px;
+    }
+
+    .row2 div:nth-child(2) {
+      padding-left: 10px;
+    }
+
+    .ch_warning {
+      font-size: 0.8em;
+      color: red;
+      text-align: left;
+    }
+
+    .d-info {
+      margin-top: 20px;
+    }
+
+    .hide {
+      display: none;
+    }
+    .fail_box{
+      border: 1px solid red;
+      box-shadow: 0 0 0 3px rgba(221,0,0,.1) inset;
+    }
+    .captcha{
+      width: 80px;
+      padding-left: 4px;
+      /* border: 1px solid blue; */
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="#" method="post">
+    <div class="pg-content">
+      <div id="login">
+        <div>
+          <h2>注册新用户</h2></div>
+        <div class="row">
+          <div><span>*</span><label for="username">用户名：</label></div>
+          <div><span id="img_user" class="input_img"></span><input type="text" id="username" tabindex="1" class="inputText">
+          </div>
+        </div>
+        <div class="row2 hide" id="div_username">
+          <div></div>
+          <div><label id="ch_username" class="ch_warning"></label></div>
+        </div>
+        <div class="row">
+          <div><span>*</span><label for="mobileNo">手机号：</label></div>
+          <div><span id="img_mobile" class="input_img"></span><input type="text" id="mobileNo" tabindex="2" class="inputText"></div>
+        </div>
+        <div class="row2" id="div_mobileNo">
+          <div></div>
+          <div><label id="ch_mobileNo" class="ch_warning"></label></div>
+        </div>
+        <div class="row">
+          <div><span>*</span><label for="password">登录密码：</label></div>
+          <div><span id="img_password" class="input_img"></span><input type="password" id="password" tabindex="3" class="inputText"></div>
+        </div>
+        <div class="row2" id="div_password">
+          <div></div>
+          <div><label id="ch_password" class="ch_warning"></label></div>
+        </div>
+        <div class="row">
+          <div><span>*</span><label for="cf_password">确认密码：</label></div>
+          <div><span id="img_cf_password" class="input_img"></span><input type="password" id="cf_password" tabindex="4" class="inputText"></div>
+        </div>
+        <div class="row2" id="div_cf_password">
+          <div></div>
+          <div><label id="ch_cf_password" class="ch_warning"></label></div>
+        </div>
+        <div class="row">
+          <div><span>*</span><label for="checkCode">验证码：</label></div>
+          <div><span id="img_checkcode" class="input_img"></span><input id="checkCode" type="text" tabindex="5"></div>
+          <div><a href="#"><img src="images/code.jpg" class="captcha" alt="captcha" title="验证码"></a></div>
+        </div>
+        <div class="row2" id="div_checkCode">
+          <div></div>
+          <div><label id="ch_checkCode" class="ch_warning"></label></div>
+        </div>
+        <div class="d-info">
+          <div><input type="checkbox" name="ck_mark" tabindex="6" id="ck_mark" checked="checked">我已阅读并同意《<a href="#">用户注册协议</a>》
+          </div>
+        </div>
+        <div>
+          <div>
+            <input class="d-submit" type="submit" value="同意以上协议并注册" onclick="return checkForm();"></div>
+        </div>
+        <div class="d-reg">
+          <div>我已注册，现在就<a href="login.html">登录</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script>
+
+    function checkForm() {
+      var ch_fields = ['username', 'mobileNo', 'password', 'cf_password', 'checkCode'];
+      var ch_info = ['用户名', '手机号', '登录密码', '确认密码', '验证码'];
+      var ch_fail_count = 0;
+      for (var i = 0; i < ch_fields.length; i++) {
+        var fieldName = ch_fields[i];
+        var com_input = document.getElementById(fieldName);
+        var com_ck = document.getElementById('ch_' + fieldName);
+        var com_div = document.getElementById('div_' + fieldName);
+        if (com_input.value.length < 1) {
+          com_ck.innerText = "！" + ch_info[i] + "不能为空";
+          com_div.classList.remove("hide");
+          com_input.classList.add("fail_box");
+          ch_fail_count++;
+        }else if(fieldName=="cf_password"){
+          var tmp_password = document.getElementById("password");
+          if(com_input!=tmp_password){
+            com_ck.innerText = "！两次录入的密码不同";
+            com_div.classList.remove("hide");
+            com_input.classList.add("fail_box");
+          }
+        }
+      }
+      if(ch_fail_count){
+        console.log(ch_fail_count);
+        return false;
+      }
+
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <style>
+    * {
+      margin: 0;
+    }
+
+    body {
+      font-size: 1.1em;
+    }
+
+    .pg-content {
+      width: 380px;
+      position: relative;
+      margin: 0 auto;
+      top: 20px;
+    }
+
+    #login {
+      border: 1px solid gray;
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    #login h2 {
+      display: block;
+      background-color: #8FC7C7;
+      border: 1px solid gray;
+      width: 320px;
+      margin: 0 auto;
+      border-radius: 4px;
+    }
+
+    #login span {
+      color: red;
+      margin: 0 5px;
+      font-weight: bold;
+    }
+
+    .row div {
+      /* float: left; */
+      display: table-cell;
+      vertical-align: bottom;
+    }
+
+    .row {
+      margin: 10px 0;
+    }
+
+    .row #username,
+    #password {
+      height: 20px;
+      width: 175px;
+      font-size: 1.1em;
+      margin-left: 15px;
+    }
+
+    .row #checkCode {
+      height: 20px;
+      font-size: 1.1em;
+      width: 80px;
+      margin-left: 15px;
+    }
+
+    .row div:nth-child(1) {
+      width: 120px;
+      text-align: right;
+      padding-right: 5px;
+      /* vertical-align: middle; */
+    }
+
+    .row div:nth-child(2) {
+      padding-left: 10px;
+      position: relative;
+      /* vertical-align: middle; */
+    }
+
+    /* #login .row span{
+      padding: 0;
+      margin: 0;
+    } */
+
+    #login .row .input_img {
+      margin: 0;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      border: 1px solid gray;
+      border-right: 0;
+      background-repeat: no-repeat;
+      position: absolute;
+      float: left;
+      left: 0px;
+    }
+
+    #img_user {
+      background-image: url("images/User_24px.png");
+    }
+
+    #img_password {
+      background-image: url("images/Lock_24px.png");
+    }
+
+    #img_checkcode {
+      background-image: url("images/Key_24px.png");
+    }
+
+    .d-submit {
+      display: block;
+      background-color: #0181A6;
+      width: 320px;
+      height: 36px;
+      line-height: 36px;
+      margin: 0 auto;
+      text-align: center;
+      color: #ffffff;
+      box-shadow: 1px 1px 3px rgba(44, 40, 37, 0.8);
+      margin-bottom: 10px;
+      border: 1px solid gray;
+      font-size: 1em;
+      border-radius: 4px;
+    }
+
+    .d-reg {
+      text-align: left;
+      margin-left: 40px;
+    }
+
+    .d-submit:hover {
+      background-color: #006B73;
+    }
+
+    .captcha {
+      width: 80px;
+      padding-left: 4px;
+      /* border: 1px solid blue; */
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="#" method="post">
+    <div class="pg-content">
+      <div id="login">
+        <div>
+          <h2>登录</h2></div>
+        <div class="row">
+          <div><span>*</span><label for="username">用户名：</label></div>
+          <div><span id="img_user" class="input_img"></span><input type="text" id="username" tabindex="1" required>
+
+          </div>
+        </div>
+        <div class="row">
+          <div><span>*</span><label for="password">密码：</label></div>
+          <div>
+            <span id="img_password" class="input_img"></span><input type="password" id="password" tabindex="2" required></div>
+        </div>
+        <div class="row">
+          <div><span>*</span><label for="checkCode">验证码：</label></div>
+          <div>
+            <span id="img_checkcode" class="input_img"></span><input id="checkCode" type="text" tabindex="3" required>
+          </div>
+          <div><a href="#"><img src="images/code.jpg" class="captcha" alt="captcha" title="验证码"></a></div>
+        </div>
+        <div class="row">
+          <div><input type="checkbox" name="ck_mark" tabindex="4" id="ck_mark">记住我
+          </div>
+          <div><a href="#">忘记密码？</a></div>
+        </div>
+        <div>
+          <div>
+            <input class="d-submit" type="submit" value="提交"></div>
+        </div>
+        <div>
+          <div class="d-reg">还没有账号？马上<a href="register.html">注册</a></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</body>
+
+</html>
